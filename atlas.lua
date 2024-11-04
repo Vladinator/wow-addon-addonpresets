@@ -1,0 +1,34 @@
+---@class AddOnPresetsNS
+local ns = select(2, ...)
+
+local ATLAS_LEFTBUTTON = "NPE_LeftClick"
+local ATLAS_RIGHTBUTTON = "NPE_RightClick"
+local ATLAS_WARNING = "perks-warning-small"
+local ATLAS_CREATE = "communities-icon-addchannelplus"
+local ATLAS_REMOVE = "communities-icon-redx"
+local ATLAS_PENCIL = "Pencil-Icon"
+local ATLAS_ENABLED = "common-icon-checkmark"
+local ATLAS_DISABLED = "common-icon-redx"
+local ATLAS_PARTIAL = "common-icon-checkmark-yellow"
+
+local ATLAS_LEFTBUTTON_MARKUP = CreateAtlasMarkup(ATLAS_LEFTBUTTON, 0, 0)
+local ATLAS_RIGHTBUTTON_MARKUP = CreateAtlasMarkup(ATLAS_RIGHTBUTTON, 0, 0)
+local ATLAS_WARNING_MARKUP = CreateAtlasMarkup(ATLAS_WARNING, 0, 0)
+local ATLAS_CREATE_MARKUP = CreateAtlasMarkup(ATLAS_CREATE, 0, 0)
+local ATLAS_REMOVE_MARKUP = CreateAtlasMarkup(ATLAS_REMOVE, 0, 0)
+local ATLAS_PENCIL_MARKUP = CreateAtlasMarkup(ATLAS_PENCIL, 0, 0)
+local ATLAS_ENABLED_MARKUP = CreateAtlasMarkup(ATLAS_ENABLED, 0, 0)
+local ATLAS_DISABLED_MARKUP = CreateAtlasMarkup(ATLAS_DISABLED, 0, 0)
+local ATLAS_PARTIAL_MARKUP = CreateAtlasMarkup(ATLAS_PARTIAL, 0, 0)
+
+ns.Atlas = {
+    ATLAS_LEFTBUTTON_MARKUP = ATLAS_LEFTBUTTON_MARKUP,
+    ATLAS_RIGHTBUTTON_MARKUP = ATLAS_RIGHTBUTTON_MARKUP,
+    ATLAS_WARNING_MARKUP = ATLAS_WARNING_MARKUP,
+    ATLAS_CREATE_MARKUP = ATLAS_CREATE_MARKUP,
+    ATLAS_REMOVE_MARKUP = ATLAS_REMOVE_MARKUP,
+    ATLAS_PENCIL_MARKUP = ATLAS_PENCIL_MARKUP,
+    ATLAS_ENABLED_MARKUP = ATLAS_ENABLED_MARKUP,
+    ATLAS_DISABLED_MARKUP = ATLAS_DISABLED_MARKUP,
+    ATLAS_PARTIAL_MARKUP = ATLAS_PARTIAL_MARKUP,
+}

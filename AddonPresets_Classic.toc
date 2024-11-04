@@ -1,0 +1,26 @@
+﻿## Interface: 11503
+## IconTexture: 2203917
+## Title: AddOnPresets (Placeholder)
+## Notes: Create presets of AddOns for easy loading and unloading.
+## Author: Vladinator
+## Version: 1.15.3.241116
+## SavedVariables: AddOnPresetsDB
+## X-Curse-Project-ID: 00000
+## X-WoWI-ID: 00000
+## X-Wago-ID: 00000000
+## X-AddonProvider: github
+#libs\LibStub\LibStub.lua
+#libs\LibDropDownExtension-1.0\LibDropDownExtension.lua
+#libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+#libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+#libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
+#locale.lua
+#sort.lua
+#menu.lua
+#addons.lua
+#db.lua
+#broker.lua
+#atlas.lua
+#staticpopup.lua
+#dropdown.lua
+#core.lua
