@@ -6,7 +6,7 @@
 ## Version: 4.4.0.241116
 ## SavedVariables: AddOnPresetsDB
 ## X-Curse-Project-ID: 1141206
-## X-WoWI-ID: 00000
+## X-WoWI-ID: 26874
 ## X-Wago-ID: aN0YB96j
 ## X-AddonProvider: github
 #libs\LibStub\LibStub.lua
