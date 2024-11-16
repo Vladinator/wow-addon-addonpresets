@@ -2,7 +2,7 @@ package-as: AddOnPresets
 enable-nolib-creation: no
 tools-used:
   - libstub
-  - callbackhandler-1.0
+  - callbackhandler
   - libdatabroker-1-1
   - libdbicon-1-0
 ignore:
