@@ -1,5 +1,5 @@
 ## Interface: 110002
-## IconTexture: 2203917
+## IconTexture: Interface\AddOns\AddOnPresets\inv_stormswake
 ## Title: AddOnPresets
 ## Notes: Create presets of AddOns for easy loading and unloading.
 ## Author: Vladinator
