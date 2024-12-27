@@ -36,7 +36,7 @@ end
 ---@param addon2 AddOnPresetsAddOnListItem
 ---@return boolean
 local function CompareAddOns(addon1, addon2)
-    return CompareAddOnNames(addon1.name, addon2.name)
+    return CompareAddOnNames(addon1.title, addon2.title)
 end
 
 ---@param addons AddOnPresetsAddOnListItem[]

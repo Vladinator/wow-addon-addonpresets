@@ -5,6 +5,7 @@ local ns = select(2, ...)
 
 ---@class AddOnPresetsAddOnListItem
 ---@field public name string
+---@field public title string
 ---@field public status? AddOnPresetsAddOnStatus
 
 ---@class AddOnPresetsAddOnListGroup
@@ -32,9 +33,10 @@ end
 local function GetList()
     local addons = {} ---@type AddOnPresetsAddOnListItem[]
     for i = 1, C_AddOns.GetNumAddOns() do
-        local name = C_AddOns.GetAddOnInfo(i)
+        local name, title = C_AddOns.GetAddOnInfo(i)
         addons[#addons + 1] = {
             name = name,
+            title = title,
             status = GetStatus(i),
         }
     end
@@ -68,16 +70,47 @@ local function GetGroupFor(groups, name)
     return group
 end
 
+---@param first string
+local function IsFirstGlyphLetter(first)
+    if first:find("[A-Za-z]") then
+        return true -- ASCII letters
+    end
+    if first:byte(1) >= 194 then
+        -- if first:find("[\195][\128-\191]") then
+        --     return true -- Latin-1 Supplement (U+00C0 to U+00FF)
+        -- end
+        if first:find("[\208-\211][\128-\191]") then
+            return true -- Cyrillic (U+0400 to U+04FF)
+        end
+        if first:find("[\234][\128-\191][\128-\191]") or first:find("[\235][\128-\191][\128-\191]") or first:find("[\236][\128-\191][\128-\191]") or first:find("[\237][\128-\158][\128-\191]") then
+            return true -- Hangul Syllables (U+AC00 to U+D7AF)
+        end
+        if first:find("[\228][\128-\191][\128-\191]") or first:find("[\229-\232][\128-\191][\128-\191]") or first:find("[\233][\128-\191][\128-\191]") then
+            return true -- CJK Unified Ideographs (U+4E00 to U+9FFF)
+        end
+    end
+    return false
+end
+
+---@param addon AddOnPresetsAddOnListItem
+local function GetFirstGlyph(addon)
+    local name = addon.title
+    if StripHyperlinks then
+        name = StripHyperlinks(name, false, false, true, false)
+    end
+    local first = name:match("[\1-\127\194-\244][\128-\191]*") ---@type string?
+    if not first or not IsFirstGlyphLetter(first) then
+        first = "#"
+    end
+    return first
+end
+
 ---@return AddOnPresetsAddOnListGroup[] addonGroups
 local function GetListGrouped()
     local groups = {} ---@type AddOnPresetsAddOnListGroup[]
     local addons = GetList()
     for _, addon in ipairs(addons) do
-        local name = addon.name
-        local first = name:sub(1, 1)
-        if not first:find("%w+") then
-            first = "#"
-        end
+        local first = GetFirstGlyph(addon)
         local group = GetGroupFor(groups, first)
         local index = #group.addons + 1
         group.addons[index] = addon

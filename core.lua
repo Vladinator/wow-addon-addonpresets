@@ -76,7 +76,7 @@ local function AppendPresetConfigureAddOnsMenu(menu, preset)
         local subMenu = menu:CreateButton(title)
         for _, addon in ipairs(group.addons) do
             subMenu:CreateCheckbox(
-                addon.name,
+                addon.title,
                 function()
                     return HasAddOn(addons, addon.name) ~= nil
                 end,
