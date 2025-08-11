@@ -1,10 +1,17 @@
 ---@class StaticPopupPolyfill : Frame
 ---@field public which string
----@field public text FontString
----@field public button1 Button
----@field public button2 Button
----@field public button3 Button
----@field public editBox EditBox
+---@field public Text FontString
+---@field public Button1 Button
+---@field public Button2 Button
+---@field public Button3 Button
+---@field public EditBox EditBox
+---@field public Resize? fun(self: StaticPopupPolyfill)
+---@field public GetButton? fun(self: StaticPopupPolyfill, index: number): Button
+---@field public text? FontString
+---@field public button1? Button
+---@field public button2? Button
+---@field public button3? Button
+---@field public editBox? EditBox
 
 ---@alias StaticPopupInfoPolyfillOnAccept fun(self: StaticPopupPolyfill)
 
@@ -35,7 +42,23 @@
 
 local StaticPopup_Show = StaticPopup_Show ---@type fun(which: string, text_arg1?: string, text_arg2?: string, data?: any, insertedFrame?: Region): StaticPopupPolyfill?
 local StaticPopup_FindVisible = StaticPopup_FindVisible ---@type fun(which: string, data?: any): StaticPopupPolyfill?
-local StaticPopup_Resize = StaticPopup_Resize ---@type fun(frame: StaticPopupPolyfill, which: string)
+local StaticPopup_Resize = StaticPopup_Resize or function(frame) frame:Resize() end ---@type fun(frame: StaticPopupPolyfill, which: string)
+
+---@param frame StaticPopupPolyfill
+local function StaticPopup_GetTextFontString(frame)
+    return frame.Text or frame.text
+end
+
+---@param frame StaticPopupPolyfill
+local function StaticPopup_GetEditBox(frame)
+    return frame.EditBox or frame.editBox
+end
+
+---@param frame StaticPopupPolyfill
+---@param index number
+local function StaticPopup_GetButton(frame, index)
+    return frame[format("Button%d", index)] or frame[format("button%d", index)] or frame:GetButton(index)
+end
 
 ---@type string
 local addonName = ...
@@ -76,7 +99,8 @@ end
 local function OnTextChanged(self)
     local frame = GetEditBoxParent(self)
     local canAccept = GetEditBoxText(self) and true or false
-    frame.button1:SetEnabled(canAccept)
+    local button1 = StaticPopup_GetButton(frame, 1)
+    button1:SetEnabled(canAccept)
 end
 
 ---@param self EditBox
@@ -98,7 +122,7 @@ end
 
 ---@param self StaticPopupPolyfill
 local function OnShow(self)
-    local editBox = self.editBox
+    local editBox = StaticPopup_GetEditBox(self)
     editBox:SetAutoFocus(false)
     editBox:ClearFocus()
     if not InCombatLockdown() then
@@ -118,7 +142,8 @@ local StaticPopupPending = {
     OnShow = noop,
     OnHide = noop,
     OnUpdate = function(self)
-        self.button1:SetEnabled(not InCombatLockdown())
+        local button1 = StaticPopup_GetButton(self, 1)
+        button1:SetEnabled(not InCombatLockdown())
     end,
     EditBoxOnEnterPressed = noop,
     EditBoxOnEscapePressed = noop,
@@ -255,7 +280,8 @@ local function ShowPending(presets, onAccept)
         table.concat(lines, "\n"),
         format(L.CLICKING_SS_WILL_RELOAD_YOUR_INTERFACE, YES)
     )
-    frame.text:SetText(text)
+    local frameText = StaticPopup_GetTextFontString(frame)
+    frameText:SetText(text)
     StaticPopup_Resize(frame, StaticPopupNamePending)
     return true
 end
@@ -275,9 +301,11 @@ local function ShowNewPreset(preset, onAccept)
         table.concat(lines, "\n"),
         format(L.ENTER_PRESET_NAME_AND_CLICK_SS, SAVE)
     )
-    frame.text:SetText(text)
+    local frameText = StaticPopup_GetTextFontString(frame)
+    frameText:SetText(text)
     StaticPopup_Resize(frame, StaticPopupNameNew)
-    frame.editBox:SetFocus()
+    local editBox = StaticPopup_GetEditBox(frame)
+    editBox:SetFocus()
     return true
 end
 
@@ -295,10 +323,12 @@ local function ShowEditPreset(preset, onAccept, onDelete)
         format(L.EDIT_PRESET_SS, preset.name),
         L.ENTER_NEW_NAME_OR_DELETE
     )
-    frame.text:SetText(text)
+    local frameText = StaticPopup_GetTextFontString(frame)
+    frameText:SetText(text)
     StaticPopup_Resize(frame, StaticPopupNameEdit)
-    frame.editBox:SetText(preset.name)
-    frame.editBox:SetFocus()
+    local editBox = StaticPopup_GetEditBox(frame)
+    editBox:SetText(preset.name)
+    editBox:SetFocus()
     return true
 end
 

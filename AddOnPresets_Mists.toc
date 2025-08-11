@@ -1,9 +1,9 @@
-﻿## Interface: 40400
+﻿## Interface: 50500
 ## IconTexture: Interface\AddOns\AddOnPresets\inv_stormswake
 ## Title: AddOnPresets
 ## Notes: Create presets of AddOns for easy loading and unloading.
 ## Author: Vladinator
-## Version: 4.4.0.241116
+## Version: 5.5.0.250811
 ## SavedVariables: AddOnPresetsDB
 ## X-Curse-Project-ID: 1141206
 ## X-WoWI-ID: 26874
