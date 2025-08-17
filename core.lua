@@ -108,7 +108,7 @@ local function AppendPresetConfigureMenu(rootDescription, preset)
             local visible = ns.StaticPopup.ShowEditPreset(
                 preset,
                 function(self)
-                    local text = ns.StaticPopup.GetEditBoxText(self.editBox)
+                    local text = ns.StaticPopup.GetFrameEditBoxText(self)
                     if text then
                         preset.name = text
                     end
@@ -181,7 +181,7 @@ local function ConfirmNewPreset()
     end
     ---@type StaticPopupInfoPolyfillOnAccept
     local function onAccept(self)
-        local text = ns.StaticPopup.GetEditBoxText(self.editBox) or L.UNTITLED_PRESET
+        local text = ns.StaticPopup.GetFrameEditBoxText(self) or L.UNTITLED_PRESET
         local preset = db.CreatePreset(text)
         preset.addons = tempPreset.addons
     end

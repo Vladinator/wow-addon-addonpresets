@@ -3,7 +3,7 @@
 ## Title: AddOnPresets
 ## Notes: Create presets of AddOns for easy loading and unloading.
 ## Author: Vladinator
-## Version: 5.5.0.250811
+## Version: 5.5.0.250817
 ## SavedVariables: AddOnPresetsDB
 ## X-Curse-Project-ID: 1141206
 ## X-WoWI-ID: 26874

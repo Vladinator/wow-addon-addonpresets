@@ -95,6 +95,13 @@ local function GetEditBoxText(self)
     end
 end
 
+---@param frame StaticPopupPolyfill
+---@return string? text
+local function GetFrameEditBoxText(frame)
+    local editBox = StaticPopup_GetEditBox(frame)
+    return GetEditBoxText(editBox)
+end
+
 ---@param self EditBox
 local function OnTextChanged(self)
     local frame = GetEditBoxParent(self)
@@ -333,7 +340,7 @@ local function ShowEditPreset(preset, onAccept, onDelete)
 end
 
 ns.StaticPopup = {
-    GetEditBoxText = GetEditBoxText,
+    GetFrameEditBoxText = GetFrameEditBoxText,
     ShowPending = ShowPending,
     ShowNewPreset = ShowNewPreset,
     ShowEditPreset = ShowEditPreset,
