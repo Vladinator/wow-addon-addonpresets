@@ -1,6 +1,8 @@
 ---@class AddOnPresetsNS
 local ns = select(2, ...)
 
+local StripHyperlinks = C_StringUtil and C_StringUtil.StripHyperlinks or StripHyperlinks
+
 ---@alias AddOnPresetsAddOnStatus "LOADED"|"LOADABLE"|"MISSING"|"DISABLED"
 
 ---@class AddOnPresetsAddOnListItem

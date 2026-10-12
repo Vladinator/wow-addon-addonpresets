@@ -57,7 +57,7 @@ end
 ---@param frame StaticPopupPolyfill
 ---@param index number
 local function StaticPopup_GetButton(frame, index)
-    return frame[format("Button%d", index)] or frame[format("button%d", index)] or frame:GetButton(index)
+    return frame[format("Button%d", index)] or frame[format("button%d", index)] or (frame.GetButton and frame:GetButton(index))
 end
 
 ---@type string
