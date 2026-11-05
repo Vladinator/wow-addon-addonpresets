@@ -18,6 +18,9 @@
         ".vscode",
         "libs"
     ],
+    "Lua.diagnostics.disable": [
+        "toc-file-name"
+    ],
     "Lua.diagnostics.globals": [
         "AddonCompartmentFrame",
         "ADDONS",
